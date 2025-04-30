@@ -8,7 +8,12 @@ const createDummyMotionComponent = (OriginalComponent: React.ElementType) => {
     return <OriginalComponent ref={ref} {...rest} />;
   });
   
-  MotionComponent.displayName = `Motion(${OriginalComponent.displayName || OriginalComponent.name || 'Component'})`;
+  const displayName = 
+    typeof OriginalComponent === 'string'
+      ? OriginalComponent
+      : OriginalComponent?.displayName || OriginalComponent?.name || 'Component';
+  
+  MotionComponent.displayName = `Motion(${displayName})`;
   return MotionComponent;
 };
 
